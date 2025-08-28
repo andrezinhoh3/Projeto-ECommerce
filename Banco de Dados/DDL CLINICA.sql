@@ -4,7 +4,7 @@
 */
 
 -- DDL - Criar - Create (Schema, Tabela)
-CREATE SCHEMA clinica;
+CREATE SCHEMA clinica IF NOT EXISTS;
 
 -- CREATE TABLE <SCHEMA>.<NOME_DA_TABELA>
 CREATE TABLE clinica.medico (
@@ -44,9 +44,25 @@ CREATE TABLE clinica.consulta (
 	id_paciente INT NOT NULL REFERENCES clinica.paciente(id_paciente)
 );
 
+-- ALTER - Alterar  Tabela 
+ALTER TABLE clinica.paciente
+ADD COLUMN cpf VARCHAR(11) UNIQUE;
+-- UNIQUE - Impede que seja cadastrado algo que ja existe no banco
+
+-- APAGAR COLUNA 
+ALTER TABLE clinica.paciente DROP COLUMN cpf;
+
+-- Renomear Tabela
+ALTER TABLE clinica.paciente RENAME TO novo_paciente;
+
+-- TRUNCATE - Limpa a tabela 
+-- TRUNCATE TABLE clinica.consulta;
+-- RESTART INDENTITY;
+-- RESTART INDENTITY - Reinicia a Sequencia 
+
 -- Apagar Tabela - DROP
 /*
-DROP TABLE clinica.consulta;
+DROP TABLE IF EXISTS clinica.consulta;
 DROP TABLE clinica.clinica;
 DROP TABLE clinica.paciente;
 DROP TABLE clinica.medico
