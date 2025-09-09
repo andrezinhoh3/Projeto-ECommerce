@@ -9,12 +9,14 @@ import java.util.List;
 @Service
 public class PedidoService {
     private final PedidoRepository pedidoRepository;
-
     public PedidoService(PedidoRepository pedido) {
         this.pedidoRepository = pedido;
     }
-
     public List<Pedido> listarPedidos () {
         return pedidoRepository.findAll();
+    }
+    // Cadastrar
+    public Pedido cadastrarPedido(Pedido p) {
+        return pedidoRepository.save(p);
     }
 }

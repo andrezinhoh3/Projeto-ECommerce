@@ -9,7 +9,6 @@ import java.util.List;
 @Service
 public class ProdutoService {
     private final ProdutoRepository produtoRepository;
-
     public ProdutoService(ProdutoRepository service) {
         this.produtoRepository = service;
     }
@@ -17,5 +16,10 @@ public class ProdutoService {
     // Listar todos Produtos
     public List<Produto> listarProdutos() {
         return produtoRepository.findAll();
+    }
+
+    //Cadastrar
+    public Produto cadastrarProduto(Produto pd) {
+        return produtoRepository.save(pd);
     }
 }

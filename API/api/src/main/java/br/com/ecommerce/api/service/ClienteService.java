@@ -12,7 +12,6 @@ public class ClienteService  {
     // Falar que Service depende de alguem
     // Final - constante
     private final ClienteRepository clienteRepository;
-
     public ClienteService(ClienteRepository repo) {
         this.clienteRepository = repo;
     }
@@ -20,5 +19,10 @@ public class ClienteService  {
     // Listar todos os clientes
     public List<Cliente> listarTodos () {
         return clienteRepository.findAll();
+    }
+
+    // Cadastrar
+    public Cliente cadastrarCliente(Cliente cl) {
+        return clienteRepository.save(cl);
     }
 }
