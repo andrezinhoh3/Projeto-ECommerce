@@ -42,4 +42,40 @@ public class ClienteController {
         // Codigo 201 - CREATED
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteNovo);
     }
+
+    // Buscar cliente por ID
+    @GetMapping("/{id}")
+    // Path Variable -> Recebe um valor no link
+    // Request Body -> Recebe dados pelo corpo
+    public ResponseEntity<?> buscarClientePorId(@PathVariable Integer id) {
+        // 1. Procurar e guardar o Cliente
+        Cliente cliente = clienteService.buscarPorId(id);
+
+
+        // 2. Se nao encontrar, retorno um erro
+        if (cliente == null) {
+            // Mais simples
+            //  return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente " + id + " nao encontrado!");
+        }
+
+        // 3. Se encontrar, retorno o Cliente
+        return ResponseEntity.ok(cliente);
+    }
+
+    // Deletar
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarCliente(@PathVariable Integer id) {
+        // 1. Verifico se o cliente existe
+        Cliente cliente = clienteService.deletarCliente(id);
+
+        // 2. Se nao existir retorno erro
+        if(cliente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente " + id + " nao encontrado!");
+        }
+
+        // 3. Se existir, retorno ok
+        return ResponseEntity.ok(cliente);
+    }
+
 }

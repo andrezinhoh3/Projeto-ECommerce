@@ -25,7 +25,7 @@ public class Pagamento {
     @Column(name = "data_pagamento", nullable = false)
     private LocalDate dataPagamento;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido idPedido;
 

@@ -17,11 +17,11 @@ public class ItemDoPedido {
     @Column(name = "quantidade", nullable = false)
     private Integer quantidade;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido idPedido;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_produto", nullable = false)
     private Produto idProduto;
 

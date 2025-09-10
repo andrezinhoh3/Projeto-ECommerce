@@ -22,4 +22,23 @@ public class ProdutoService {
     public Produto cadastrarProduto(Produto pd) {
         return produtoRepository.save(pd);
     }
+
+    // Buscar cliente por ID
+    public Produto buscarPorId(Integer id) {
+        return produtoRepository.findById(id).orElse(null);
+    }
+
+    // Deletar
+    public Produto deletarProduto(Integer id) {
+        // 1. Verifico se o Produto existe
+        Produto produto = buscarPorId(id);
+
+        // 2. Se nao existir, retorno nulo
+        if(produto == null) {
+            return null;
+        }
+        // 3. Se existir, excluo
+        produtoRepository.delete(produto);
+        return produto;
+    }
 }
