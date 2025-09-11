@@ -20,4 +20,22 @@ public class ItemPedidoService {
     public ItemDoPedido cadastrarItemDoPedido(ItemDoPedido itemDoPedido) {
         return itemPedidoRepository.save(itemDoPedido);
     }
+
+    // Buscar
+    public ItemDoPedido buscarItemDoPedidoPorId(Integer id) {
+        return itemPedidoRepository.findById(id).orElse(null);
+    }
+
+    // Deletar
+    public ItemDoPedido deletarItemDoPedidoPorId(Integer id) {
+        // 1. Verifico se o Item existe
+        ItemDoPedido itemDoPedido = buscarItemDoPedidoPorId(id);
+        // 2. Se nao existir, retorno nulo
+        if(itemDoPedido == null) {
+            return null;
+        }
+        // 3. Se existir, excluo
+        itemPedidoRepository.delete(itemDoPedido);
+        return itemDoPedido;
+    }
 }

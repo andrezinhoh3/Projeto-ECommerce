@@ -19,4 +19,20 @@ public class PedidoService {
     public Pedido cadastrarPedido(Pedido p) {
         return pedidoRepository.save(p);
     }
+    // Buscar
+    public Pedido buscarPorId(Integer id) {
+        return pedidoRepository.findById(id).orElse(null);
+    }
+    // Deletar
+    public Pedido deletarPedido(Integer id) {
+        // 1. Verifico se o Pedido existe
+        Pedido pedido = buscarPorId(id);
+        // 2. Se nao existir, retorno nulo
+        if (pedido == null) {
+            return null;
+        }
+        // 3. Se existir, excluo
+        pedidoRepository.delete(pedido);
+        return pedido;
+    }
 }

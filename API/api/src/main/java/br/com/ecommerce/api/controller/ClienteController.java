@@ -3,6 +3,8 @@ package br.com.ecommerce.api.controller;
 import br.com.ecommerce.api.model.Cliente;
 import br.com.ecommerce.api.repository.ClienteRepository;
 import br.com.ecommerce.api.service.ClienteService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import java.util.List;
 @RestController
 // Criando um link pro front-end se conectar ao back-end
 @RequestMapping("/api/clientes")
+@Tag(name = "Clientes", description = "Operações relacionadas ao cadastro de clientes")
 
 // INJECAO DE DEPENDENCIA
 public class ClienteController {
@@ -45,6 +48,10 @@ public class ClienteController {
 
     // Buscar cliente por ID
     @GetMapping("/{id}")
+    @Operation(
+            summary = "Buscando um cliente por ID",
+            description = "Retorna os dados completos de um único cliente com base no seu ID numérico."
+    )
     // Path Variable -> Recebe um valor no link
     // Request Body -> Recebe dados pelo corpo
     public ResponseEntity<?> buscarClientePorId(@PathVariable Integer id) {
@@ -76,6 +83,20 @@ public class ClienteController {
 
         // 3. Se existir, retorno ok
         return ResponseEntity.ok(cliente);
+    }
+
+    // Atualizar
+    @PutMapping("/{id}")
+    public ResponseEntity<?> atualizarCliente(@PathVariable Integer id, @RequestBody Cliente clienteNovo) {
+        // 1. Tento atualizar o cliente
+        Cliente cl = clienteService.atualizarCliente(id, clienteNovo);
+
+        // 2. Se nao achar o cliente, mostro erro
+        if(cl == null) {
+            return ResponseEntity.status(404).body("Cliente nao encontrado!");
+        }
+        // 3. Se achar retorno ok
+            return ResponseEntity.ok(cl);
     }
 
 }

@@ -45,4 +45,23 @@ public class ClienteService  {
         clienteRepository.delete(cliente);
         return cliente;
     }
+
+    // Atualizar
+    public Cliente atualizarCliente(Integer id, Cliente clienteNovo) {
+        // 1. Procurar quem eu quero atualizar
+        Cliente clienteAntigo = buscarPorId(id);
+
+        // 2. Se eu nao achar, retorno nulo
+        if (clienteAntigo == null) {
+            return null;
+        }
+
+        // 3. Se eu achar eu atualizo
+        clienteAntigo.setDataCadastro(clienteNovo.getDataCadastro());
+        clienteAntigo.setEmail(clienteNovo.getEmail());
+        clienteAntigo.setSenha(clienteNovo.getSenha());
+        clienteAntigo.setTelefone(clienteNovo.getTelefone());
+        clienteAntigo.setNomeCompleto(clienteNovo.getNomeCompleto());
+        return clienteRepository.save(clienteAntigo);
+    }
 }
