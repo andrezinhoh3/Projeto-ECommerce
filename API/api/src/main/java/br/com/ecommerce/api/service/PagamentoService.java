@@ -36,4 +36,18 @@ public class PagamentoService {
         pagamentoRepository.delete(pagamento);
         return pagamento;
     }
+    // Atualizar
+    public Pagamento atualizarPagamento(Integer id, Pagamento pgNovo) {
+        // 1. Procurar quem eu quero atualizar
+        Pagamento pagamentoAntigo = buscarPorId(id);
+        // 2. Se eu nao achar, retorno nulo
+        if (pagamentoAntigo == null) {
+            return null;
+        }
+        // 3. Se eu achar eu atualizo
+        pagamentoAntigo.setDataPagamento(pgNovo.getDataPagamento());
+        pagamentoAntigo.setFormaPagamento(pgNovo.getFormaPagamento());
+        pagamentoAntigo.setStatus(pgNovo.getStatus());
+        return pagamentoRepository.save(pagamentoAntigo);
+    }
 }

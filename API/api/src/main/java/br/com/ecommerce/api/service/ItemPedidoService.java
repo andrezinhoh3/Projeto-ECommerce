@@ -38,4 +38,16 @@ public class ItemPedidoService {
         itemPedidoRepository.delete(itemDoPedido);
         return itemDoPedido;
     }
+    // Atualizar
+    public ItemDoPedido atualizarItemDoPedido(Integer id, ItemDoPedido itemDoPedidoNovo) {
+        // 1. Procurar quem eu quero atualizar
+        ItemDoPedido itemDoPedidoAntigo = buscarItemDoPedidoPorId(id);
+        // 2. Se eu nao achar, retorno nulo
+        if (itemDoPedidoAntigo == null) {
+        return null;
+        }
+        // 3. Se eu achar eu atualizo
+        itemDoPedidoAntigo.setQuantidade(itemDoPedidoAntigo.getQuantidade());
+        return itemPedidoRepository.save(itemDoPedidoAntigo);
+    }
 }

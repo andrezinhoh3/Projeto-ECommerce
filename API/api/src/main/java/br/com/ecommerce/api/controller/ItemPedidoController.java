@@ -1,6 +1,7 @@
 package br.com.ecommerce.api.controller;
 
 import br.com.ecommerce.api.model.ItemDoPedido;
+import br.com.ecommerce.api.repository.ItemPedidoRepository;
 import br.com.ecommerce.api.service.ItemPedidoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -13,9 +14,11 @@ import java.util.List;
 @RequestMapping("/api/itemdospedidos")
 @Tag(name = "ItemdoPedido", description = "Operacoes relacionadas ao item do pedido ")
 public class ItemPedidoController {
+    private final ItemPedidoRepository itemPedidoRepository;
     private ItemPedidoService itemPedidoService;
-    public ItemPedidoController(ItemPedidoService itemPedido) {
+    public ItemPedidoController(ItemPedidoService itemPedido, ItemPedidoRepository itemPedidoRepository) {
         this.itemPedidoService = itemPedido;
+        this.itemPedidoRepository = itemPedidoRepository;
     }
     @GetMapping
     public ResponseEntity<List<ItemDoPedido>> listarPedidos() {
@@ -56,4 +59,16 @@ public class ItemPedidoController {
         return ResponseEntity.ok(itemDoPedido);
     }
 
+    // Atualizar
+    @PutMapping("/{id}")
+    public ResponseEntity<?> atualizarItemDoPedido(@PathVariable Integer id, @RequestBody ItemDoPedido itemDoPedidoNovo) {
+        // 1. Tento atualizar o item
+        ItemDoPedido it = itemPedidoService.atualizarItemDoPedido(id, itemDoPedidoNovo);
+        // 2. Se nao achar o cliente, mostro erro
+        if (it == null) {
+            return ResponseEntity.status(404).body("Item do pedido nao encontrado!");
+        }
+        // 3. Se achar retorno ok
+            return ResponseEntity.ok(it);
+    }
 }
