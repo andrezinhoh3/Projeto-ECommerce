@@ -21,7 +21,7 @@ public class TipoUsuario {
 
     // Id - Define que é uma chave primaria
     @Id
-    // Generated Value - define qye a chave é gerenciada pelo BD
+    // Generated Value - define que a chave é gerenciada pelo BD
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // Column - configura a coluna
     // name - nome da coluna

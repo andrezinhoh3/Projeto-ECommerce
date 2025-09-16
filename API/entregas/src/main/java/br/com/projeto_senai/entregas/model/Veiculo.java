@@ -16,8 +16,8 @@ import lombok.Setter;
 // Entity - Informa que essa classe é uma tabela
 @Entity
 // table - Permite que voce configure a tabela
-@Table (name = "usuario")
-public class Usuario {
+@Table(name = "veiculo")
+public class Veiculo {
 
     // Id - Define que é uma chave primaria
     @Id
@@ -26,24 +26,25 @@ public class Usuario {
     // Column - configura a coluna
     // name - nome da coluna
     // nullable - se pode ser nulo ou nao
-    @Column(name = "usuario_id", nullable = false)
-    private Integer usuarioId;
+    @Column(name = "veiculo_id", nullable = false)
+    private Integer veiculoId;
 
-                                      // definindo para ser TEXT inves de VARCHAR
-    @Column(name = "nome_completo", nullable = false, columnDefinition = "TEXT")
-    private String nomeCompleto;
-//                                                             para o email ser unico
-    @Column(name = "email", nullable = false, unique = true, columnDefinition = "TEXT")
-    private String email;
+    // definindo para ser TEXT inves de VARCHAR
+    @Column(name = "placa", nullable = false, columnDefinition = "TEXT")
+    private String placa;
+    //                                                             para o email ser unico
+    @Column(name = "modelo", nullable = false, columnDefinition = "TEXT")
+    private String modelo;
 
-    @Column(name = "senha", nullable = false)
-    private String senha;
+    @Column(name = "tipo", nullable = false, columnDefinition = "TEXT")
+    private String tipo;
+
 
     // Muitos USUARIOS para um TIPO USUARIO
     // Fetch.Type.EAGER - Carrega os dados juntos
     // optional - se é obrigatorio ou nao
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     // Avisar para o Java, qual a coluna do tipo usuario vou relacionar
-    @JoinColumn(name = "tipo_usuario_id")
-    private TipoUsuario tipoUsuario;
+    @JoinColumn(name = "entregador_id")
+    private Usuario entregador;
 }
