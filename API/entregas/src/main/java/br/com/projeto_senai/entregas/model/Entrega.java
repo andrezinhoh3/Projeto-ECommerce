@@ -34,7 +34,7 @@ public class Entrega {
     // definindo para ser TEXT inves de VARCHAR
     @Column(name = "descricao_produto", nullable = false, columnDefinition = "TEXT")
     private String descricaoProduto;
-    //                                                             para o email ser unico
+
     @Column(name = "status", nullable = false)
     private String status;
 

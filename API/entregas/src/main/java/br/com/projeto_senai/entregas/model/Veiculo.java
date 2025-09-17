@@ -30,7 +30,7 @@ public class Veiculo {
     private Integer veiculoId;
 
     // definindo para ser TEXT inves de VARCHAR
-    @Column(name = "placa", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "placa", nullable = false, columnDefinition = "TEXT", unique = true)
     private String placa;
     //                                                             para o email ser unico
     @Column(name = "modelo", nullable = false, columnDefinition = "TEXT")
