@@ -1,6 +1,5 @@
 package br.com.projeto_senai.entregas.controller;
 
-<<<<<<< HEAD
 import br.com.projeto_senai.entregas.model.Veiculo;
 import br.com.projeto_senai.entregas.service.VeiculoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/veiculos")
-@Tag(name = "Veiculos", description = "Endpoints para gerenciamento de veiculos")
-=======
+
 import br.com.projeto_senai.entregas.service.VeiculoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/veiculos")
->>>>>>> 176bc55444fed1fd33200430864b6f6ea12b7997
+@Tag(name = "Veiculos", description = "Endpoints para gerenciamento de veiculos")
 public class VeiculoController {
     private VeiculoService veiculoService;
     public VeiculoController(VeiculoService veiculoService) {
@@ -32,7 +28,7 @@ public class VeiculoController {
     }
 
     // Listar todos
-<<<<<<< HEAD
+
     @GetMapping
     @Operation(summary = "Lista todos os veiculos", description = "Retorna uma lista com todos os veiculos cadastrados.")
     @ApiResponse(responseCode = "200", description = "Operação bem-sucedida")
@@ -56,6 +52,7 @@ public class VeiculoController {
         }
         return ResponseEntity.ok(veiculo);
     }
+
 
     // Inserir Novo
     @PostMapping
@@ -104,7 +101,4 @@ public class VeiculoController {
         }
         return ResponseEntity.ok("Veiculo excluido com sucesso");
     }
-=======
-
->>>>>>> 176bc55444fed1fd33200430864b6f6ea12b7997
 }

@@ -5,6 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 // Lombok
 @Getter
@@ -17,7 +23,7 @@ import lombok.Setter;
 @Entity
 // table - Permite que voce configure a tabela
 @Table (name = "usuario")
-public class Usuario {
+public class Usuario  implements UserDetails {
 
     // Id - Define que é uma chave primaria
     @Id
@@ -46,4 +52,40 @@ public class Usuario {
     // Avisar para o Java, qual a coluna do tipo usuario vou relacionar
     @JoinColumn(name = "tipo_usuario_id")
     private TipoUsuario tipoUsuario;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(tipoUsuario.getDescricao()));
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true; // A conta não expirou?
+
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;  // A conta não está bloqueada?
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;  // As credenciais não expiraram?
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;  // A conta está habilitada?
+    }
 }

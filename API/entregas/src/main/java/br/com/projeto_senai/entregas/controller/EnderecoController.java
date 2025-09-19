@@ -1,14 +1,11 @@
 package br.com.projeto_senai.entregas.controller;
 
 import br.com.projeto_senai.entregas.model.Endereco;
-<<<<<<< HEAD
 import br.com.projeto_senai.entregas.model.TipoUsuario;
 import br.com.projeto_senai.entregas.model.Usuario;
 import br.com.projeto_senai.entregas.service.EnderecoService;
 import br.com.projeto_senai.entregas.service.UsuarioService;
-=======
 import br.com.projeto_senai.entregas.service.EnderecoService;
->>>>>>> 176bc55444fed1fd33200430864b6f6ea12b7997
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -24,17 +21,9 @@ import java.util.List;
 @RequestMapping("/api/enderecos")
 @Tag(name = "Enderecos", description = "Endpoints para gerenciamento de enderecos")
 public class EnderecoController {
-<<<<<<< HEAD
-    private final UsuarioService usuarioService;
-    private EnderecoService enderecoService;
-    public EnderecoController(EnderecoService service, UsuarioService usuarioService) {
-        this.enderecoService = service;
-        this.usuarioService = usuarioService;
-=======
     private EnderecoService enderecoService;
     public EnderecoController(EnderecoService service) {
         this.enderecoService = service;
->>>>>>> 176bc55444fed1fd33200430864b6f6ea12b7997
     }
 
     // Listar todos
@@ -77,7 +66,6 @@ public class EnderecoController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(enderecoNovo);
     }
-<<<<<<< HEAD
 
     // Atualizar
     @PutMapping("/{id}")
@@ -109,6 +97,4 @@ public class EnderecoController {
         }
         return ResponseEntity.ok("Endereço excluido com sucesso");
     }
-=======
->>>>>>> 176bc55444fed1fd33200430864b6f6ea12b7997
 }

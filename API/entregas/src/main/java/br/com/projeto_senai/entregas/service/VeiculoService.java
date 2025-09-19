@@ -25,6 +25,12 @@ public class VeiculoService {
         return veiculoRepository.findById(id).orElse(null);
     }
 
+
+    // Buscar por Placa
+    public Veiculo buscarPorPlaca(String placa) {
+        return veiculoRepository.findByPlaca(placa).orElse(null);
+    }
+
     // Cadastrar
     public Veiculo cadastarVeiculo(Veiculo veiculo) {
         return veiculoRepository.save(veiculo);
