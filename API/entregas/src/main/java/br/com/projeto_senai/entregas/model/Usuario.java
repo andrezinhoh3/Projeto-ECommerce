@@ -60,13 +60,18 @@ public class Usuario  implements UserDetails {
 
     @Override
     public String getPassword() {
+        // Retorna a senha do usuário (que estará criptografada no banco).
         return senha;
     }
 
     @Override
     public String getUsername() {
+        // Retorna o identificador único do usuário para o login (estamos usando o email).
         return email;
     }
+
+    // Para simplificar, os métodos abaixo sempre retornam 'true',
+    // indicando que a conta do usuário está sempre ativa e válida.
 
     @Override
     public boolean isAccountNonExpired() {
