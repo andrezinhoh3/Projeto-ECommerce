@@ -2,15 +2,19 @@ package br.com.projeto_senai.entregas.service;
 
 import br.com.projeto_senai.entregas.model.Usuario;
 import br.com.projeto_senai.entregas.repository.UsuarioRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UsuarioService {
-    private UsuarioRepository usuarioRepository;
-    public UsuarioService(UsuarioRepository repo) {
+    private final UsuarioRepository usuarioRepository;
+
+    private final PasswordEncoder passwordEncoder;
+    public UsuarioService(UsuarioRepository repo, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = repo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // Listar
@@ -25,6 +29,12 @@ public class UsuarioService {
 
     // Cadastrar
     public Usuario cadastrarUsuario(Usuario usuario) {
+        String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
+
+        // Substitui a senha original pelo hash gerado
+        usuario.setSenha(senhaCriptografada);
+
+        // Salva o usuário no banco com a senha já em formato de hash
         return usuarioRepository.save(usuario);
     }
 

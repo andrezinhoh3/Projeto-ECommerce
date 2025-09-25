@@ -1,5 +1,6 @@
-package br.com.projeto_senai.entregas.dto;
+package br.com.projeto_senai.entregas.controller;
 
+import br.com.projeto_senai.entregas.dto.LoginRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,14 +36,14 @@ public class LoginController {
     // @PostMapping: Mapeia este método para requisições do tipo POST na URL do controller
     // (ou seja, /api/auth).
     @PostMapping()
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest login) {
         // @RequestBody: Pega o corpo da requisição (JSON) e o converte para um objeto LoginRequest.
 
         // --- ETAPA 1: AUTENTICAÇÃO ---
 
         // 2. Cria um "pedido de autenticação" com o email e senha que o usuário enviou.
         // Neste ponto, as credenciais ainda não são confiáveis.
-        var authToken = new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getSenha());
+        var authToken = new UsernamePasswordAuthenticationToken(login.getEmail(), login.getSenha());
 
         // 3. Entrega o pedido ao Gerente. Ele usará nosso UserDetailsServiceImpl e PasswordEncoder
         // para verificar se o usuário existe e se a senha está correta.
